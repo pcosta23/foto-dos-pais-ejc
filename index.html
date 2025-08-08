@@ -4,77 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foto dos Pais EJC</title>
- <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    text-align: center;
-    padding: 20px;
-  }
-  header img {
-    max-width: 200px;
-  }
-  form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    max-width: 500px;
-    margin: auto;
-    text-align: left;
-  }
-  form label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  form input[type="text"],
-  form input[type="file"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-    background: #ff5722;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #e64a19;
-  }
-  .extra {
-    margin-bottom: 20px;
-  }
-</style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 20px;
+    }
 
-<form id="uploadForm">
-  <div id="entries">
-    <div class="extra">
-      <label>Nome do Padrinho:</label>
-      <input type="text" name="padrinho" required>
+    header img {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
 
-      <label>Nome(s) do(s) Encontrista(s):</label>
-      <input type="text" name="encontristas" required>
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+      text-align: left;
+    }
 
-      <label>Círculo:</label>
-      <input type="text" name="circulo" required>
+    form label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
 
-      <label>Fotos:</label>
-      <input type="file" name="fotos" accept="image/*" multiple required>
+    form input[type="text"],
+    form input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #ff5722;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e64a19;
+    }
+
+    .extra {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="EJC ALTENATIVO 2.png" alt="Logo EJC">
+    <h1>Foto dos Pais EJC</h1>
+  </header>
+
+  <form id="uploadForm">
+    <div id="entries">
+      <div class="extra">
+        <label>Nome do Padrinho:</label>
+        <input type="text" name="padrinho" required>
+
+        <label>Nome(s) do(s) Encontrista(s):</label>
+        <input type="text" name="encontristas" required>
+
+        <label>Círculo:</label>
+        <input type="text" name="circulo" required>
+
+        <label>Fotos:</label>
+        <input type="file" name="fotos" accept="image/*" multiple required>
+      </div>
     </div>
-  </div>
-  <button type="button" onclick="addEntry()">+ Adicionar outro padrinho</button>
-  <button type="submit">Enviar</button>
-</form>
+    <button type="button" onclick="addEntry()">+ Adicionar outro padrinho</button>
+    <button type="submit">Enviar</button>
+  </form>
 
 
   <script>
@@ -136,6 +150,7 @@
   </script>
 </body>
 </html>
+
 
 
 
