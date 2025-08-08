@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foto dos Pais EJC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 20px;
+    }
+    header img {
+      max-width: 200px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #ff5722;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e64a19;
+    }
+    .extra {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      background: #f7f7f7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="EJC ALTENATIVO 2.png" alt="Logo EJC">
+    <h1>Foto dos Pais EJC</h1>
+  </header>
+
+  <form id="uploadForm">
+    <div id="entries">
+      <div class="extra">
+        <label>Nome do Padrinho:</label>
+        <input type="text" name="padrinho" required>
+
+        <label>Nome(s) do(s) Encontrista(s):</label>
+        <input type="text" name="encontristas" required>
+
+        <label>Círculo:</label>
+        <input type="text" name="circulo" required>
+
+        <label>Fotos:</label>
+        <input type="file" name="fotos" accept="image/*" multiple required>
+      </div>
+    </div>
+    <button type="button" onclick="addEntry()">+ Adicionar outro padrinho</button>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyVW3zMrsiWNfL8yAvQTXGNQVDd34Rj9lnUXO1ZDZlyALuBWOgbUoszuVVKIDbvXro29w/exec";
+
+    function addEntry() {
+      const container = document.createElement("div");
+      container.classList.add("extra");
+      container.innerHTML = `
+        <label>Nome do Padrinho:</label>
+        <input type="text" name="padrinho" required>
+        <label>Nome(s) do(s) Encontrista(s):</label>
+        <input type="text" name="encontristas" required>
+        <label>Círculo:</label>
+        <input type="text" name="circulo" required>
+        <label>Fotos:</label>
+        <input type="file" name="fotos" accept="image/*" multiple required>
+      `;
+      document.getElementById("entries").appendChild(container);
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const entries = document.querySelectorAll('#entries .extra');
+      let payload = [];
+
+      for (let entry of entries) {
+        let padrinho = entry.querySelector('[name="padrinho"]').value;
+        let encontristas = entry.querySelector('[name="encontristas"]').value;
+        let circulo = entry.querySelector('[name="circulo"]').value;
+        let files = entry.querySelector('[name="fotos"]').files;
+
+        let fotosBase64 = [];
+        for (let file of files) {
+          fotosBase64.push(await toBase64(file));
+        }
+
+        payload.push({ padrinho, encontristas, circulo, fotos: fotosBase64 });
+      }
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      }).then(() => {
+        alert("Enviado com sucesso!");
+        location.reload();
+      }).catch(err => alert("Erro ao enviar: " + err));
+    });
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
+</body>
+</html>
